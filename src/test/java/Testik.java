@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class Testik {
 
     @BeforeAll
-        static void beforeAll(){
+        static void setupSelenideEnv(){
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
     }
@@ -17,8 +17,10 @@ public class Testik {
 
 
     @Test
-    void FillForm() {
+    void fillFormTest() {
         open("/automation-practice-form");
+        executeJavaScript("$('footer').remove();");
+        executeJavaScript("$('#fixedban').remove();");
         $("#firstName").setValue("Sake");
         $("#lastName").setValue("Maki");
         $("#userEmail").setValue("susi@susi.com");
@@ -36,7 +38,7 @@ public class Testik {
         $("[for='hobbies-checkbox-3']").click();
         $("#uploadPicture").uploadFromClasspath("images (2).jpg");
         $("#currentAddress").setValue("Tokyo Hotel");
-        $("footer").scrollTo();
+        //$("footer").scrollTo();
         $("#state").click();
         $("#react-select-3-option-3").click();
         $("#city").click();
